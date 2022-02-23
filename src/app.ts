@@ -27,5 +27,6 @@ app.post(
 app.get('/products', productsControllers.getProducts);
 
 app.post('/orders', ordersValidations.crateOrders, ordersControllers.createOrders);
+app.get('/orders/:id', ordersControllers.getOrdersById);
 
 export default app;

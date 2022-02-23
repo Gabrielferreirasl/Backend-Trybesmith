@@ -9,8 +9,17 @@ const createOrders = async (req: Request, res: Response) => {
   res.status(code).json(response);
 };
 
+const getOrdersById = async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  const { response, code } = await ordersServices.getOrdersById(+id);
+  
+  res.status(code).json(response);
+};
+
 export {
   createOrders,
+  getOrdersById,
 };
   
 export default createOrders;

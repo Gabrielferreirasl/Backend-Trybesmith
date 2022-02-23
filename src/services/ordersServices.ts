@@ -7,8 +7,25 @@ const createOrders = async (products: number[], userId: number) => {
   return { response: { order: { userId, products } }, code: 201 };
 };
 
+const getOrdersById = async (id: number) => {
+  const errorResponse = { response: { error: 'Order not found' }, code: 404 };
+
+  if (!id || typeof id !== 'number') {
+    console.log(id);
+    
+    return errorResponse;
+  }
+
+  const orders = await ordersModels.getOrdersById(id);
+
+  if (!orders) return errorResponse;
+
+  return { response: orders, code: 200 };
+};
+
 export { 
   createOrders,
+  getOrdersById,
 };
 
 export default createOrders;
