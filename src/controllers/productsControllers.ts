@@ -9,8 +9,15 @@ const createProduct = async (req: Request, res: Response) => {
   res.status(code).json(response);
 };
 
+const getProducts = async (_req: Request, res: Response) => {
+  const { response, code } = await productsServices.getProducts();
+
+  res.status(code).json(response);
+};
+
 export {
   createProduct,
+  getProducts,
 };
   
 export default createProduct;

@@ -16,8 +16,18 @@ const createProduct = async ({ name, amount, userId }: productsInterfaces.UserPr
   return idFromOrder;
 };
 
+const getProducts = async () => {
+  const [products] = await connection.execute(
+    `SELECT a.id, name, amount, orderId FROM Trybesmith.Products AS a
+     INNER JOIN Trybesmith.Orders AS b ON b.id = a.orderId`,
+  );
+
+  return products;
+};
+
 export {
   createProduct,
+  getProducts,
 };
 
 export default createProduct;

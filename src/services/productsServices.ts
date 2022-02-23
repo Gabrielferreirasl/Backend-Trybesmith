@@ -7,8 +7,15 @@ const createProduct = async ({ name, amount, userId }: productsInterfaces.UserPr
   return { response: { item: { id, name, amount } }, code: 201 };
 };
 
+const getProducts = async () => {
+  const products = await productsModels.getProducts();
+
+  return { response: products, code: 200 };
+};
+
 export { 
   createProduct,
+  getProducts,
 };
 
 export default createProduct;
