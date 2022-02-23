@@ -1,12 +1,17 @@
-interface User {
+interface Login {
   username: string,
+  password: string,
+  id?: number,
+}
+
+interface User extends Login {
   classe: string,
   level: number,
-  password: string
 }
 
 export {
   User,
+  Login,
 };
 
 export default User;

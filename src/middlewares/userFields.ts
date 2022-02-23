@@ -54,7 +54,7 @@ const joiValidation = ({ username, classe, level, password }: usersInterfaces.Us
     .messages(LEVEL_MESSAGES),
 }).validate({ username, classe, level, password });
 
-const userFields = (req: Request, res: Response, next: NextFunction) => {
+const createUserValidation = (req: Request, res: Response, next: NextFunction) => {
   const { username, classe, level, password } = req.body;
 
   const { error } = joiValidation({ username, classe, level, password });
@@ -70,4 +70,32 @@ const userFields = (req: Request, res: Response, next: NextFunction) => {
   next();
 };
 
-export default userFields;
+const loginUserValidation = async (req: Request, res: Response, next: NextFunction) => {
+  const { username, password } = req.body;
+  
+  const { error } = Joi.object({
+    username: Joi.string().min(3).not().empty()
+      .required()
+      .messages(USERNAME_MESSAGES),
+    password: Joi.string().min(8).not().empty()
+      .required()
+      .messages(PASSWORD_MESSAGES),
+  }).validate({ username, password });
+
+  if (error) {
+    const index: string = error.details[0].type;
+    const code: number = errorsCode[index as keyof typeof errorsCode];
+    const message = formatMessage(error.details[0].message);
+
+    return res.status(code).json({ error: message });
+  }
+
+  next();
+};
+
+export {
+  createUserValidation,
+  loginUserValidation,
+};
+
+export default createUserValidation;
