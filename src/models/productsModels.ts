@@ -2,24 +2,18 @@ import { ResultSetHeader } from 'mysql2';
 import * as productsInterfaces from '../interfaces/productsInterfaces';
 import connection from './connection';
 
-const createProduct = async ({ name, amount, userId }: productsInterfaces.UserProduct) => {
-  const [{ insertId: idFromOrder }] = await connection.execute<ResultSetHeader>(
-    'INSERT INTO Trybesmith.Orders (userId) VALUES (?)',
-    [userId],
-  );
-
-  await connection.execute<ResultSetHeader>(
+const createProduct = async ({ name, amount }: productsInterfaces.Product) => {
+  const [{ insertId }] = await connection.execute<ResultSetHeader>(
     'INSERT INTO Trybesmith.Products (name, amount, orderId) VALUES (?, ?, ?)',
-    [name, amount, idFromOrder],
+    [name, amount, null],
   );
 
-  return idFromOrder;
+  return insertId;
 };
 
 const getProducts = async () => {
   const [products] = await connection.execute(
-    `SELECT a.id, name, amount, orderId FROM Trybesmith.Products AS a
-     INNER JOIN Trybesmith.Orders AS b ON b.id = a.orderId`,
+    'SELECT * FROM Trybesmith.Products',
   );
 
   return products;
