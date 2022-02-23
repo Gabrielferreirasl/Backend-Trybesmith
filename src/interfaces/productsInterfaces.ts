@@ -4,13 +4,8 @@ interface Product {
   amount: string,
 }
 
-interface UserProduct extends Product {
-  userId: number,
-}
-
 export {
   Product,
-  UserProduct,
 };
 
 export default Product;

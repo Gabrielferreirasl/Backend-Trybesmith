@@ -17,9 +17,16 @@ const getOrdersById = async (req: Request, res: Response) => {
   res.status(code).json(response);
 };
 
+const getOrders = async (_req: Request, res: Response) => {
+  const { response, code } = await ordersServices.getOrders();
+  
+  res.status(code).json(response);
+};
+
 export {
   createOrders,
   getOrdersById,
+  getOrders,
 };
   
 export default createOrders;

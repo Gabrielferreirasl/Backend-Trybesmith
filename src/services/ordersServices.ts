@@ -1,5 +1,4 @@
 import * as ordersModels from '../models/ordersModels';
-// import * as ordersInterfaces from '../interfaces/ordersInterfaces';
 
 const createOrders = async (products: number[], userId: number) => {
   await ordersModels.createOrders(products, userId);
@@ -23,9 +22,16 @@ const getOrdersById = async (id: number) => {
   return { response: orders, code: 200 };
 };
 
+const getOrders = async () => {
+  const orders = await ordersModels.getOrders();
+
+  return { response: orders, code: 200 };
+};
+
 export { 
   createOrders,
   getOrdersById,
+  getOrders,
 };
 
 export default createOrders;
