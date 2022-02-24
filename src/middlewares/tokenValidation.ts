@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import * as usersInterfaces from '../interfaces/usersInterfaces';
 
-const { JWT_SECRET = 'suaSenha' } = process.env;
+const JWT_SECRET = process.env.JWT_SECRET || 'senha';
 
 const tokenValidation = async (req: Request, res: Response, next: NextFunction) => {
   const { authorization } = req.headers;
