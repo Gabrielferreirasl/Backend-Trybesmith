@@ -10,8 +10,6 @@ const getOrdersById = async (id: number) => {
   const errorResponse = { response: { error: 'Order not found' }, code: 404 };
 
   if (!id || typeof id !== 'number') {
-    console.log(id);
-    
     return errorResponse;
   }
 

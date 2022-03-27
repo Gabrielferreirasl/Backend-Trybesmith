@@ -23,7 +23,7 @@ const getOrdersById = async (id: number) => {
   );
   
   const [order] = rows as Order[];
-  
+
   if (!order) return null;
 
   const [productsRows] = await connection.execute(
@@ -45,18 +45,21 @@ const getOrders = async () => {
 
   const orders = orderRows as Order[];
 
-  const idsProducts = await Promise.all(orders.map(({ id }) => connection.execute(
-    'SELECT id FROM Trybesmith.Products WHERE orderId = ?',
-    [id],
-  )));
+  const idsProducts = await Promise.all(
+    orders.map(({ id }) => connection.execute(
+      'SELECT id FROM Trybesmith.Products WHERE orderId = ?',
+      [id],
+    )),
+  );
 
-  const formatIdsProducts = idsProducts.map(([ids]) => {
-    const [{ id }] = ids as Product[];
-    return [id];
+  const response = idsProducts.map(([setHeader], index) => {
+    const ids = setHeader as Product[];
+    return { 
+      ...orders[index],
+      products: ids.map(({ id }) => id),
+    };
   });
-
-  const response = orders.map((order, index) => ({ ...order, products: formatIdsProducts[index] }));
-
+  
   return response;
 };
 

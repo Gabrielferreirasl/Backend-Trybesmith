@@ -20,7 +20,7 @@ const login = async ({ username, password }: usersInterfaces.Login) => {
 
   if (!user) return { response: { error: 'Username or password invalid' }, code: 401 };
 
-  const token = jwt.sign({ id: user.id, username }, JWT_SECRET, {
+  const token: string = jwt.sign({ id: user.id, username }, JWT_SECRET, {
     algorithm: 'HS256',
     expiresIn: '1d',
   });
