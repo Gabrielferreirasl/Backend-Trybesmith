@@ -1,6 +1,6 @@
 ## Description
 
-In this project, I developed a CRUD (Create, Read, Update and Delete) of medieval items, in the format of an API, using Typescript.
+In this project, I developed a CRUD (Create, Read, Update and Delete) of medieval items, in the format of an API, using Typescript and Express.
 
 ## After downloading the project:
 
