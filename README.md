@@ -4,7 +4,7 @@ In this project, I developed a CRUD (Create, Read, Update and Delete) of medieva
 
 ## After downloading the project:
 
-create an .env file to connect to your local database:
+create an .env file to connect to your local MySQL database:
 ```
 MYSQL_USER=yourUser
 MYSQL_PASSWORD=yourPass
